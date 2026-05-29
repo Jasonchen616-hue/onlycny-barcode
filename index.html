@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>条形码生成器</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../web-tools/legal.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <h1 class="page-title">条形码生成器</h1>
+        <p class="page-desc">输入编号或文本，生成条形码并下载图片。</p>
+      </header>
+
+      <main class="panel">
+        <div class="tool-layout">
+          <div class="tool-form">
+            <section class="block">
+              <label class="block-label" for="bc-text">条码内容</label>
+              <input
+                type="text"
+                id="bc-text"
+                class="input-text input-text--single"
+                placeholder="编号或文本"
+                spellcheck="false"
+                autocomplete="off"
+              />
+            </section>
+
+            <section class="block">
+              <h2 class="block-label">参数</h2>
+              <div class="params-grid">
+                <div class="field">
+                  <label class="field-label" for="bc-format">条码类型</label>
+                  <select id="bc-format" class="field-control">
+                    <option value="CODE128" selected>CODE128</option>
+                    <option value="CODE39">CODE39</option>
+                    <option value="EAN13">EAN13</option>
+                    <option value="EAN8">EAN8</option>
+                    <option value="UPC">UPC</option>
+                    <option value="ITF14">ITF14</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="field-label" for="bc-width">条码宽度</label>
+                  <input type="number" id="bc-width" class="field-control" value="2" min="1" max="10" step="1" />
+                </div>
+                <div class="field">
+                  <label class="field-label" for="bc-height">条码高度</label>
+                  <input type="number" id="bc-height" class="field-control" value="80" min="20" max="300" step="1" />
+                </div>
+                <div class="field">
+                  <label class="field-label" for="bc-margin">边距（px）</label>
+                  <input type="number" id="bc-margin" class="field-control" value="10" min="0" max="80" step="1" />
+                </div>
+                <div class="field field--color">
+                  <label class="field-label" for="bc-fg">前景色</label>
+                  <div class="color-row">
+                    <input type="color" id="bc-fg" class="color-input" value="#000000" />
+                    <input type="text" id="bc-fg-text" class="color-text" value="#000000" maxlength="7" />
+                  </div>
+                </div>
+                <div class="field field--color">
+                  <label class="field-label" for="bc-bg">背景色</label>
+                  <div class="color-row">
+                    <input type="color" id="bc-bg" class="color-input" value="#ffffff" />
+                    <input type="text" id="bc-bg-text" class="color-text" value="#ffffff" maxlength="7" />
+                  </div>
+                </div>
+                <div class="field field--checkbox">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="bc-display-value" checked />
+                    显示文字
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <div class="actions" role="group" aria-label="操作">
+              <button type="button" class="btn btn-primary" id="btn-generate">生成条形码</button>
+              <button type="button" class="btn btn-default" id="btn-png" disabled>下载 PNG</button>
+              <button type="button" class="btn btn-default" id="btn-svg" disabled>下载 SVG</button>
+              <button type="button" class="btn btn-default" id="btn-clear">清空</button>
+            </div>
+
+            <p class="hint" id="hint" role="status" aria-live="polite" hidden></p>
+          </div>
+
+          <section class="tool-preview" aria-labelledby="preview-label">
+            <h2 id="preview-label" class="block-label">预览</h2>
+            <div class="preview-box" id="preview-box">
+              <div class="preview-empty" id="preview-empty">
+                <p>暂无条形码</p>
+              </div>
+              <div class="preview-result" id="preview-result" hidden>
+                <svg id="bc-svg" role="img" aria-label="条形码预览"></svg>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <footer class="site-legal-footer" role="contentinfo">
+      <nav class="site-legal-footer__nav" aria-label="网站信息">
+        <a href="../web-tools/about.html">关于我们</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/privacy.html">隐私政策</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/disclaimer.html">免责声明</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/terms.html">使用条款</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/contact.html">联系我们</a>
+      </nav>
+    </footer>
+
+
+    <script src="./lib/JsBarcode.all.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
